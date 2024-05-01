@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html class="page" lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Страница</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="view-transition" content="same-origin">
+
+	<link rel="stylesheet" href="/styles/index.css">
+
+	{# <link rel="preconnect" href="https://cdn.usefathom.com/">
+	<link rel="dns-prefetch" href="https://cdn.usefathom.com/">
+
+	<link rel="preload" href="/fonts/inter-variable.woff2" crossorigin as="font" type="font/woff2">
+	<link rel="preload" href="/fonts/neue-machina.woff2" crossorigin as="font" type="font/woff2">
+	<link rel="preload" href="/fonts/jetbrains-mono.woff2" crossorigin as="font" type="font/woff2"> #}
+
+	{# <link rel="icon" href="/images/logo/favicon.ico" sizes="any">
+	<link rel="icon" href="/images/logo/any.svg" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="/images/logo/180.png">
+	<link rel="manifest" href="/manifest.json"> #}
+{# 
+	<link rel="canonical" href="{{ global.domain + page.url }}">
+	<link rel="me" href="https://mastodon.social/@pepelsbey"> #}
+{# 
+	<meta name="description" content="{{ desc | markdownRemove }}">
+	<meta name="generator" content="{{ eleventy.generator }}">
+
+	<meta name="theme-color" media="(prefers-color-scheme: light)" content="#c1f07c">
+	<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#9874d3"> #}
+
+	{# <meta property="og:type" content="website">
+	<meta property="og:title" content="{{ title }}">
+	<meta property="og:description" content="{{ desc | markdownRemove }}">
+	<meta property="og:url" content="{{ (global.domain + page.url) }}">
+
+	<meta property="og:image" content="{{ cover }}">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="630">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@pepelsbey_dev"> #}
+
+	{# <link rel="alternate" type="application/rss+xml" href="{{ global.domain }}/feed/" title="{{ global.title }}"> #}
+
+	<script defer src="/scripts/index.js"></script>
+	{# <script defer src="https://cdn.usefathom.com/script.js" data-site="AQPFXSVA"></script> #}
+</head>
+<body class="page__body">
+	{% include 'header.njk' %}
+	<main class="main">
+		{{ content | safe }}
+	</main>
+
+	{% include 'footer.njk' %}
+
+		<script>
+
+		// User theme
+
+		function delay(t, val) {
+			return new Promise(resolve => setTimeout(resolve, t, val));
+		}
+
+		const themeSwitcherButtons = document.querySelectorAll('.theme-switcher__button')
+		const themeSwitcherMarker = document.querySelector('.theme-switcher__marker')
+		const themeSwitcher = document.querySelector('.theme-switcher')
+
+		themeSwitcherButtons.forEach(element => {
+			element.addEventListener('click', () => {
+				let buttonData = element.dataset.action;
+				setUserTheme(buttonData)
+			})
+		})
+
+		function setButtonSwitcherMode(theme) {
+			const themeSwitcherButton = document.getElementById(`theme-${theme}`)
+
+			themeSwitcherButtons.forEach(element => {
+				element.classList.remove('active')
+			})
+			
+			themeSwitcherButton.classList.add('active')
+
+			const buttonRect = themeSwitcherButton.getBoundingClientRect()
+			const buttonLeft = buttonRect.x
+			const buttonTop = buttonRect.y
+			const buttonWidth = buttonRect.width
+			const buttonHeight = buttonRect.height
+
+			const conteinerRect = themeSwitcher.getBoundingClientRect()
+			const conteinerLeft = conteinerRect.x
+			const conteinerTop = conteinerRect.y
+
+			themeSwitcherMarker.style = `width: ${buttonWidth}px; height: ${buttonHeight}px; transform: translate(${buttonLeft - conteinerLeft}px, ${buttonTop - conteinerTop}px);`
+		}
+
+		function getAutoTheme() {
+			if (window.matchMedia && 
+				window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					document.documentElement.classList.add("dark-theme");
+					return "dark";
+				} else {
+					document.documentElement.classList.remove("dark-theme");
+					return "light";
+				}
+		}
+
+		function getUserTheme() {
+			const theme = JSON.parse(localStorage.getItem("theme"));
+
+			if (!isNaN(theme)) {
+
+				localStorage.setItem("theme", JSON.stringify("sys"));
+				getAutoTheme();
+				setUserTheme('sys');
+				return;
+			}
+
+			setUserTheme(theme)
+		}
+
+		function getUserThemeValue() {
+			const theme = JSON.parse(localStorage.getItem("theme"));
+
+			if (!isNaN(theme)) {
+
+				localStorage.setItem("theme", JSON.stringify("sys"));
+				return 'sys';
+			}
+
+			return theme;
+		}
+
+
+		function setUserTheme(theme) {
+			if (theme) localStorage.setItem("theme", JSON.stringify(theme));
+			switch(theme) {
+				case "dark":
+					document.documentElement.classList.add("dark-theme");
+					setButtonSwitcherMode(theme);
+					break
+				case "sys":
+					getAutoTheme();
+					setButtonSwitcherMode('sys');
+					break
+				case "light":
+					document.documentElement.classList.remove("dark-theme");
+					setButtonSwitcherMode(theme);
+					break
+				default:
+					getAutoTheme();
+					localStorage.setItem("theme", JSON.stringify("sys"));
+
+					setButtonSwitcherMode("sys");
+			}
+		}
+
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+			getAutoTheme();
+		});
+
+		getUserTheme();
+		window.addEventListener('DOMContentLoaded', () => {
+			setButtonSwitcherMode(getUserThemeValue());
+		})
+		window.addEventListener('load', () => {
+			delay(0)
+			.then(() => {
+				setButtonSwitcherMode(getUserThemeValue());
+			})
+			.then(() => {
+				setTimeout(() => {
+					themeSwitcher.classList.add('animations-on');
+				}, 20)
+			})
+		})
+
+		// Lazy loading
+
+		class ImageLazyload {
+			constructor() {
+				this.images = document.querySelectorAll(".preload-available");
+			}
+
+			lazyLoad() {
+				this.images.forEach(element => {
+					element.classList.add("lazy");
+					element.classList.add("img-loading");
+					element.setAttribute("loading", "lazy")
+					this.addLoadConteiner(element);
+				});
+			}
+
+			addLoadConteiner(element) {
+				const parent = element.parentElement;
+				const src = element.src;
+				const imgName = src.split('/images/')[1]
+				const url = src.split('/images/')[0]
+				const baseName = imgName.split(".")[0]
+				const lastName = imgName.split(".")[1]
+				const source = document.createElement("source");
+				source.classList.add("img-preload");
+				source.srcset = `${url}/images/${baseName}_very_small.${lastName}`;
+				parent.prepend(source);
+				// Add preview image load event
+				element.addEventListener("load", () => {
+					source.remove();
+					// Add main image load event
+					element.addEventListener("load", () => {
+						element.classList.remove("img-loading");
+					})
+				})
+			}
+		}
+		lazyLoad = new ImageLazyload();
+		lazyLoad.lazyLoad();
+	</script>
+</body>
+</html>

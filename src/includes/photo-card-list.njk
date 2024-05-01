@@ -1,0 +1,10 @@
+{% macro photoCardList(collection, limit) %}
+    {% from 'photo-card-in-list.njk' import photoCardInList %}
+    <div class="photo-cards-list">
+        {% for photo in collection %}
+            {% if loop.index <= limit and photo.url != page.url %}
+                {{ photoCardInList(photo, loop.index) }}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endmacro %}

@@ -1,0 +1,8 @@
+{% macro image(src, desc, source_list, class, allow_preload) %}
+    <picture>
+        {% for src in source_list %}
+            <source srcset="{{ src }}" />
+        {% endfor %}
+        <img src="{{ src }}" alt="{{ desc }}" class="{{ class }} {{ 'preload-available' if allow_preload }}">
+    </picture>
+{% endmacro %}

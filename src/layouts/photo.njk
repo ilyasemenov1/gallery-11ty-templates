@@ -1,0 +1,47 @@
+---
+layout: page.njk
+---
+
+{% from 'image-waterfall.njk' import imageWaterfall %}
+{% from 'image.njk' import image %}
+{% from 'photo-actions.njk' import photoActions %}
+
+<div class="image-info">
+    <div class="image-info__image-conteiner">
+        <div class="image-info__image-preload-conteiner" style="aspect-ratio: {{ aspect_ratio }};">
+            {{ image(
+                src='images/' + name + '.' + ex,
+                desc=description,
+                source_list=[
+                    'images/' + name + '_medium.' + ex
+                ],
+                class='image-info__image',
+                allow_preload=false
+            ) }}
+            {{ photoActions(ex, name) }}
+        </div>
+    </div>
+    <div class="image-info-content {{ 'short' if aspect_ratio == '9/16' }}">
+        <div class="image-info-content__info">
+            {{ photoActions(ex, name, true) }}
+            <ul class="tags">
+                {% for item in tags %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            <div>
+                {% for item in info %}
+                    <div class="image-info-content__row">
+                        <h3 class="image-info-content__topic">{{ item.title }}</h3>
+                        <span>{{ item.value }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{{ imageWaterfall({
+    collection: collections.photos,
+    label: 'Последние фотографии',
+    max_images: 15
+}) }}

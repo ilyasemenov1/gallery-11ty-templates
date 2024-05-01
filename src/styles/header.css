@@ -1,0 +1,65 @@
+.header {
+    position: absolute;
+    max-width: 1440px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 0 0 20px 20px;
+    background: inherit;
+    backdrop-filter: blur(10px);
+    z-index: 20;
+    transition: all .2s ease, background 0ms;
+    h1 {
+        a {
+            background: linear-gradient(60deg,coral,violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            transition: .1s ease;
+            &:hover,
+            &:focus {
+                filter: contrast(.7) brightness(.8);
+            }
+        }
+    }
+}
+.header__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    ul {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+        a {
+            font-size: 18px;
+            text-decoration-color: var(--text-decoration-color-1);
+            &:hover,
+            &:focus {
+                color: var(--text-color-3);
+                text-decoration-color: var(--text-decoration-color-2);
+            }
+        }
+        @media (width <= 768px ) {
+            display: none;
+        }
+    }
+}
+.burger-menu-button {
+    @media (width > 768px) {
+        display: none;
+    }
+}
+.header.scrolled {
+    position: fixed;
+    background: var(--bg-color-4);
+    animation: addHeader .2s ease forwards;
+    h1 {
+        font-size: 27px;
+    }
+}
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}

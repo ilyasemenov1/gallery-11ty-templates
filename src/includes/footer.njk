@@ -1,0 +1,28 @@
+
+{% from 'link.njk' import link %}
+
+<footer class="footer">
+    <ul class="footer__side">
+        {% for item in footer.social.list %}
+            {{ link({ 
+                text: item.title,
+                url: item.url,
+                icon_id: item.icon_id,
+                blank: true,
+                no_stroke: true
+             }) }}
+        {% endfor %}
+    </ul>
+    <ul class="footer__side right">
+        {% for item in footer.credits.list %}
+            {{ link({ 
+                text: item.title,
+                url: item.url,
+                icon_id: item.icon_id,
+                blank: true,
+                no_stroke: item.no_stroke,
+                no_icon: item.no_icon
+             }) }}
+        {% endfor %}
+    </ul>
+</footer>

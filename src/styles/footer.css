@@ -1,0 +1,59 @@
+.footer__side {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    &.right {
+        justify-content: end;
+    }
+    li {
+        position: relative;
+        margin: 0;
+        color: var(--text-color-1);
+        &:nth-child(n+2)::before {
+            position: absolute;
+            content: ".";
+            left: -10px;
+            top: -5px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+    }
+}
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    max-width: 1440px;
+    padding: 20px 40px;
+    border-radius: 20px 20px 0 0;
+    background: var(--bg-color-4);
+    @media (width <= 580px) {
+        flex-direction: column;
+        gap: 26px;
+        .right {
+            position: relative;
+            justify-content: start;
+            &::before {
+                position: absolute;
+                top: -13px;
+                content: "";
+                width: 100%;
+                height: 1px;
+                background: var(--text-color-1);
+                opacity: .2;
+            }
+        }
+    }
+}
+.id--eleventy svg,
+.id--gitlab svg  {
+    width: 26px;
+    height: 26px;
+}
+.id--unsplash svg {
+    width: 15px;
+    height: 15px;
+}

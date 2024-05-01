@@ -1,0 +1,33 @@
+{% macro imageWaterfall(params) %}
+    {% from 'photo-card-list.njk' import photoCardList %}
+    {% from 'link.njk' import link %}
+
+    {% set collection = params.collection %}
+    {% set maxImages = params.max_images %}
+
+    <section class="image-waterfall {{ 'no-margin' if params.no_margin }}">
+        <h1 class="image-waterfall__label">
+            <span>{{ params.label }}</span>
+            <span class="image-waterfall__counter">
+                {% if collection.length <= maxImages %}
+                    {{ collection.length }}
+                {% else %}
+                    {{ maxImages }} из {{ collection.length }}
+                {% endif %}
+            </span>
+        </h1>
+        {{ photoCardList(collection | reverse, maxImages) }}
+        {% if collection.length > maxImages %}
+            <div class="image-waterfall-see-all">
+                    {{
+                        link({
+                            text: 'Посмотреть все',
+                            url: params.url,
+                            icon_id: 'diagonal-arrow',
+                            no_stroke: true
+                        })
+                    }}
+            </div>
+        {% endif %}
+    </section>
+{% endmacro %}

@@ -1,0 +1,20 @@
+{% macro photoActions(name, ex, isInConteiner) %}
+    <div class="image-info-actions {{ 'in-conteiner' if isInConteiner }} {{ 'not-in-conteiner' if not isInConteiner }}">
+        <a href="images/{{ name }}.{{ ex }}" class="image-info-actions__link element--hover-1" download="">
+            <div class="image-info-actions__icon">
+                <svg width="20" height="20" aria-hidden="true">
+                    <use href="/svg/icons.svg#download" />
+                </svg>
+            </div>
+            <span>Скачать</span>
+        </a>
+        <a href="images/{{ name }}.{{ ex }}" class="image-info-actions__link element--hover-1" target="blank">
+            <div class="image-info-actions__icon">
+                <svg width="20" height="20" aria-hidden="true">
+                    <use href="/svg/icons.svg#open-full" />
+                </svg>
+            </div>
+            <span>Открыть в новой вкладке</span>
+        </a>
+    </div>
+{% endmacro %}

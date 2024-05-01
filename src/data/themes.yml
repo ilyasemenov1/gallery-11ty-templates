@@ -1,0 +1,7 @@
+list:
+- title: 'Тёмная'
+  value: 'dark'
+- title: 'Системная'
+  value: 'sys'
+- title: 'Светлая'
+  value: 'light'

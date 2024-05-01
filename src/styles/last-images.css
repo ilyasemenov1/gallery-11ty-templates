@@ -1,0 +1,131 @@
+.image-waterfall {
+    position: relative;
+    margin: 20px 0 0 0;
+    h1 {
+        position: relative;
+        width: fit-content;
+        font-size: 27px;
+    }
+    &.no-margin {
+        margin: 0;
+    }
+}
+.image-waterfall-see-all {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: 300px;
+    height: 100%;
+    padding: 20px;
+    background: linear-gradient(to bottom, #00000000, var(--bg-color-1) 60%);
+    a {
+        position: relative;
+        top: 70px;
+    }
+    svg {
+        left: 13px;
+        top: 13px;
+        width: 24px;
+        height: 24px;
+    }
+}
+.image-waterfall__counter {
+    position: absolute;
+    width: 100%;
+    left: calc(100% + 4px);
+    font-size: 14px;
+}
+.photo-cards-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+    grid-auto-rows: 10px;
+    justify-content: center;
+}
+.photo-card-in-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px #00000015;
+    background: var(--bg-color-2);
+    color: var(--text-color-1);
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: .2s ease;
+    &:hover,
+    &:has(a:focus) {
+        box-shadow: 0 4px 12px #00000034;
+    }
+    .photo-card-in-list__icon {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        right: 12px;
+        top: 12px;
+        border-radius: 50%;
+        background: var(--bg-color-4);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 4px 12px #0000002c;
+        opacity: 0;
+        pointer-events: none;
+        transition: .2s ease;
+        svg {
+            fill: var(--text-color-1);
+        }
+    }
+    img, picture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    & > a {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        &:hover,
+        &:focus {
+            div {
+                opacity: 1;
+            }
+        }
+    }
+    &.small {
+        grid-row-end: span 45;
+    }
+    &.med {
+        grid-row-end: span 55;
+    }
+    &.large {
+        grid-row-end: span 65;
+    }
+    &.landscape {
+        &.small {
+            grid-row-end: span 23;
+        }
+        &.med {
+            grid-row-end: span 26;
+        }
+        &.large {
+            grid-row-end: span 29;
+        }
+    }
+    @media (width <= 1024px) {
+        &.small, &.med, &.large {
+            grid-row-end: span 55;
+        }
+        &.landscape {
+            &.small, &.med, &.large {
+                grid-row-end: span 26;
+            }
+        }
+    }
+}

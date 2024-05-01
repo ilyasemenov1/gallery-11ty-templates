@@ -1,0 +1,36 @@
+{
+  "name": "si1og-gallery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "eleventy --serve --quiet",
+    "build": "rm -rf dist && eleventy",
+    "test": "npm run editorconfig && npm run html && npm run css && npm run javascript",
+    "editorconfig": "editorconfig-checker",
+    "html": "w3c-html-validator dist --ignore-config=.validator",
+    "css": "stylelint \"src/styles/**/*.css\"",
+    "javascript": "eslint eleventy.config.js src/**/*.js"
+  },
+  "keywords": [],
+  "author": "Ilya Semenov",
+  "license": "MIT",
+  "browserslist": [
+		"last 3 version",
+		"not dead"
+	],
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+		"@11ty/eleventy-img": "^3.1.8",
+		"@11ty/eleventy-plugin-rss": "^1.2.0",
+    "esbuild": "^0.20.0",
+		"eslint": "^8.56.0",
+    "focus-trap": "^7.5.4",
+		"html-minifier-terser": "^7.2.0",
+		"js-yaml": "^4.1.0",
+		"stylelint": "^16.2.1",
+		"stylelint-order": "^6.0.4",
+		"w3c-html-validator": "^1.6.4",
+		"lightningcss": "^1.23.0"
+  }
+}

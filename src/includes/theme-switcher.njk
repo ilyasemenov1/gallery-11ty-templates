@@ -1,0 +1,10 @@
+{% macro themeSwitcher(params) %}
+    {% set themes = params.themes %}
+
+    <div class="theme-switcher">
+        {% for button in themes.list %}
+            <button class="theme-switcher__button" data-action="{{ button.value }}" id="theme-{{ button.value }}">{{ button.title }}</button>
+        {% endfor %}
+        <span class="theme-switcher__marker"></span>
+    </div>
+{% endmacro %}

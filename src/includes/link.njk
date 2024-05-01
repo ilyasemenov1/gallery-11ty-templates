@@ -1,0 +1,12 @@
+{% macro link(params) %}
+    <a href="{{ params.url }}" class="global-link element--hover-1 {{ 'no-icon' if params.no_icon }}" target="{{ '_blank' if params.is_targer_black | escape }}">
+        {% if not params.no_icon %}
+            <div class="global-link__icon {{ 'no-stroke' if params.no_stroke }} id--{{ params.icon_id }}">
+                <svg width="20" height="20" aria-hidden="true">
+                    <use href="/svg/icons.svg#{{ params.icon_id }}" />
+                </svg>
+            </div>
+        {% endif %}
+        <span>{{ params.text }}</span>
+    </a>
+{% endmacro %}

@@ -1,0 +1,26 @@
+{% from 'image-waterfall.njk' import imageWaterfall %}
+{{ imageWaterfall({
+    collection: collections.photos_2024,
+    label: '2024',
+    max_images: 15,
+    no_margin: true,
+    url: 'photos/2024'
+}) }}
+{{ imageWaterfall({
+    collection: collections.photos_2023,
+    label: '2023',
+    max_images: 15,
+    url: 'photos/2023'
+}) }}
+{{ imageWaterfall({
+    collection: collections.photos_2022,
+    label: '2022',
+    max_images: 15,
+    url: 'photos/2022'
+}) }}
+{{ imageWaterfall({
+    collection: collections.photos,
+    label: 'Последние фотографии',
+    max_images: 15,
+    url: 'photos'
+}) }}

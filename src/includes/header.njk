@@ -1,0 +1,29 @@
+
+{% from 'theme-switcher.njk' import themeSwitcher %}
+
+<header class="header">
+    <div class="header__content">
+        <h1>
+            <a href="{{ header.label.url }}">
+                <i>#</i>Галерейка
+            </a>
+        </h1>
+        <div class="header__actions">
+            <nav>
+                <ul>
+                    {% for item in header.dates %}
+                        <li>
+                            <a href="{{ item.url }}" class="header__link {{ 'active' if item.url == page.url }}">{{ item.label }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            {{ themeSwitcher({
+                themes: themes
+            }) }}
+        </div>
+        <button class="burger-menu-button">
+            <span class="burger-menu-button__burger"></span>
+        </button>
+    </div>
+</header>

@@ -1,0 +1,10 @@
+label:
+  url: /
+
+dates:
+- label: 2022
+  url: /photos/2022
+- label: 2023
+  url: /photos/2023
+- label: 2024
+  url: /photos/2024

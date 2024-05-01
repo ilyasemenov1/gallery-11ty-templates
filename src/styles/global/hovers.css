@@ -1,0 +1,8 @@
+.element--hover-1 {
+    &:hover,
+    &:focus {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 3px 12px #00000078;
+        cursor: pointer;
+    }
+}
